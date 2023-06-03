@@ -25,7 +25,6 @@ const Popup = ({visible, onDismiss, refetch}: IProps) => {
 
   useEffect(() => {
     if (visible && detailContact) {
-      console.log(`detailContact`, {detailContact, age: detailContact?.age});
       setFirstName(detailContact.firstName);
       setLastName(detailContact?.lastName);
       setAge(detailContact?.age);
@@ -170,7 +169,6 @@ const Popup = ({visible, onDismiss, refetch}: IProps) => {
             mode="contained"
             onPress={doDelete}
             style={{
-              //   marginTop: 4,
               borderRadius: 8,
               backgroundColor: 'red',
             }}>
