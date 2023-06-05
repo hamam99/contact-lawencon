@@ -16,7 +16,6 @@ const contactSlide = createSlice({
   initialState,
   reducers: {
     setDetail(state, action: PayloadAction<Contact>) {
-      console.log(`contact_slide`, {state, action});
       state.detailContact = action.payload;
     },
   },

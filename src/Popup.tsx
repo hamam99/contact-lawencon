@@ -30,7 +30,6 @@ const Popup = ({visible, onDismiss, refetch}: IProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(`contact popup`, {contact});
     if (visible && contact.detailContact) {
       setFirstName(contact.detailContact?.firstName);
       setLastName(contact.detailContact?.lastName);
