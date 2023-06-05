@@ -7,6 +7,9 @@ import {
   deleteContact,
   editContact,
 } from './services/ContactServices';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from './stores/store';
+import {setDetail} from './stores/contactSlice';
 
 type IProps = {
   visible: boolean;
@@ -23,17 +26,21 @@ const Popup = ({visible, onDismiss, refetch}: IProps) => {
 
   const [loading, setLoading] = useState(false);
 
+  const contact = useSelector((state: RootState) => state.contact);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (visible && detailContact) {
-      setFirstName(detailContact.firstName);
-      setLastName(detailContact?.lastName);
-      setAge(detailContact?.age);
-      setProfileUrl(detailContact?.photo);
+    console.log(`contact popup`, {contact});
+    if (visible && contact.detailContact) {
+      setFirstName(contact.detailContact?.firstName);
+      setLastName(contact.detailContact?.lastName);
+      setAge(contact.detailContact?.age);
+      setProfileUrl(contact.detailContact?.photo);
     }
   }, [visible]);
 
   const doAction = async () => {
-    if (detailContact) {
+    if (contact?.detailContact) {
       await doAddNewContact('edit');
 
       return;
@@ -75,7 +82,8 @@ const Popup = ({visible, onDismiss, refetch}: IProps) => {
     setFirstName(null);
     setLastName(null);
     setAge(null);
-    setProfileUrl(null);
+    // setProfileUrl(null);
+    dispatch(setDetail(null));
   };
 
   const doDelete = async () => {

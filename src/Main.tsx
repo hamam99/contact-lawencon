@@ -6,11 +6,17 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Popup from './Popup';
 import FastImage from 'react-native-fast-image';
 import {ActivityIndicator, MD2Colors} from 'react-native-paper';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from './stores/store';
+import {setDetail} from './stores/contactSlice';
 
 const Main = () => {
   const {listContact, setDetailContact} = useContact(state => state);
   const [loading, setLoading] = useState(false);
   const [isShowPopup, setShowPopup] = useState(false);
+
+  //   const contact = useSelector((state: RootState) => state.contact);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     loadAllContact();
@@ -55,6 +61,7 @@ const Main = () => {
               onPress={() => {
                 setShowPopup(true);
                 setDetailContact(item);
+                dispatch(setDetail(item));
               }}
             />
           );

@@ -4,11 +4,11 @@ export interface getAllContactResponse {
 }
 
 export interface Contact {
-  id: string;
-  firstName: string;
-  lastName: string;
-  age: string;
-  photo: string;
+  id?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  age?: string | null;
+  photo?: string | null;
 }
 
 export type IResponseFormat<K = null, V = null> = {
