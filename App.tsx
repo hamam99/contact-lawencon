@@ -38,7 +38,6 @@ function App(): JSX.Element {
   return (
     <>
       <Toast />
-
       <PaperProvider>
         <SafeAreaView
           style={{flex: 1, padding: 16, backgroundColor: '#F8F8F8'}}>
@@ -52,20 +51,7 @@ function App(): JSX.Element {
             }}>
             Contact App
           </Text>
-          {loading && (
-            <ActivityIndicator
-              animating={true}
-              color={MD2Colors.red800}
-              style={{
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                position: 'absolute',
-                zIndex: 999,
-              }}
-            />
-          )}
+          {loading && <Loading />}
 
           {isShowPopup && (
             <Popup
@@ -80,57 +66,21 @@ function App(): JSX.Element {
             ItemSeparatorComponent={<View style={{height: 8}} />}
             renderItem={({item}) => {
               return (
-                <TouchableOpacity
-                  style={{
-                    paddingVertical: 8,
-                    paddingHorizontal: 16,
-                    backgroundColor: 'white',
-                    borderRadius: 4,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    columnGap: 12,
-                  }}
+                <ItemContact
+                  item={item}
                   onPress={() => {
                     setShowPopup(true);
                     setDetailContact(item);
-                  }}>
-                  <Avatar
-                    photo={item.photo}
-                    firstName={item.firstName}
-                    lastName={item.lastName}
-                  />
-                  <Text>
-                    {item?.firstName} {item?.lastName}
-                  </Text>
-                </TouchableOpacity>
+                  }}
+                />
               );
             }}
           />
-          <TouchableOpacity
+          <AddIcon
             onPress={() => {
               setShowPopup(true);
-            }}>
-            <View
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: 30,
-                backgroundColor: '#00B2FF',
-                position: 'absolute',
-                bottom: 0,
-                right: 0,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image
-                source={require('./src/assets/plus-white.png')}
-                style={{
-                  width: 23,
-                  height: 23,
-                }}
-              />
-            </View>
-          </TouchableOpacity>
+            }}
+          />
         </SafeAreaView>
       </PaperProvider>
     </>
@@ -141,6 +91,30 @@ const styles = StyleSheet.create({});
 
 export default App;
 
+const ItemContact = ({item, onPress}) => {
+  return (
+    <TouchableOpacity
+      style={{
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        backgroundColor: 'white',
+        borderRadius: 4,
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 12,
+      }}
+      onPress={onPress}>
+      <Avatar
+        photo={item.photo}
+        firstName={item.firstName}
+        lastName={item.lastName}
+      />
+      <Text>
+        {item?.firstName} {item?.lastName}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 const Avatar = ({
   photo,
   firstName,
@@ -178,5 +152,49 @@ const Avatar = ({
       <Text>{firstName?.[0]}</Text>
       <Text>{lastName?.[0]}</Text>
     </View>
+  );
+};
+
+const AddIcon = ({onPress}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <View
+        style={{
+          width: 60,
+          height: 60,
+          borderRadius: 30,
+          backgroundColor: '#00B2FF',
+          position: 'absolute',
+          bottom: 0,
+          right: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Image
+          source={require('./src/assets/plus-white.png')}
+          style={{
+            width: 23,
+            height: 23,
+          }}
+        />
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const Loading = () => {
+  return (
+    <ActivityIndicator
+      animating={true}
+      color={MD2Colors.red800}
+      style={{
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        position: 'absolute',
+        zIndex: 999,
+      }}
+    />
   );
 };
