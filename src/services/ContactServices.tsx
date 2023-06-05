@@ -32,7 +32,6 @@ export const addNewContact = async (
 ): Promise<IResponseFormat<String, String>> => {
   try {
     const res = await AxiosClient.post(ListUrl.contact, dataPost);
-    // const data = res.data as getAllContactResponse;
     return {
       response: 'Success add new contact',
       error: null,
@@ -52,7 +51,6 @@ export const editContact = async (
 ): Promise<IResponseFormat<String, String>> => {
   try {
     const res = await AxiosClient.put(`${ListUrl.contact}/${userId}`, dataPost);
-    // const data = res.data as getAllContactResponse;
     return {
       response: 'Success edit contact',
       error: null,
@@ -71,7 +69,6 @@ export const deleteContact = async (
 ): Promise<IResponseFormat<String, String>> => {
   try {
     const res = await AxiosClient.delete(`${ListUrl.contact}/${userId}`);
-    // const data = res.data as getAllContactResponse;
     return {
       response: 'Success delete contact',
       error: null,

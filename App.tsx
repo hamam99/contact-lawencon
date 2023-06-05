@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, {useState} from 'react';
 import {
   FlatList,
@@ -20,12 +13,8 @@ import {
   ActivityIndicator,
   MD2Colors,
   Text,
-  FAB,
   PaperProvider,
-  Modal,
-  Portal,
 } from 'react-native-paper';
-import {SwipeListView} from 'react-native-swipe-list-view';
 import Popup from './src/Popup';
 import FastImage from 'react-native-fast-image';
 import Toast from 'react-native-toast-message';
